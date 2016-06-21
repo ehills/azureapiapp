@@ -1,57 +1,43 @@
 package io.swagger.api;
 
-import io.swagger.model.*;
-import io.swagger.api.ContactsApiService;
-import io.swagger.api.factories.ContactsApiServiceFactory;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 import io.swagger.annotations.ApiParam;
-
-import com.sun.jersey.multipart.FormDataParam;
-
+import io.swagger.api.factories.ContactsApiServiceFactory;
 import io.swagger.model.Contact;
-
-import java.util.List;
-import io.swagger.api.NotFoundException;
-
-import java.io.InputStream;
-
-import com.sun.jersey.core.header.FormDataContentDisposition;
-import com.sun.jersey.multipart.FormDataParam;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.*;
 
 @Path("/contacts")
 
-
 @io.swagger.annotations.Api(description = "the contacts API")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JaxRSServerCodegen", date = "2015-12-03T07:51:23.751Z")
-public class ContactsApi  {
-   private final ContactsApiService delegate = ContactsApiServiceFactory.getContactsApi();
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-06-21T04:44:27.437Z")
+public class ContactsApi {
+	private final ContactsApiService delegate = ContactsApiServiceFactory.getContactsApi();
 
-    @GET
-    
-    
-    @Produces({ "application/json", "text/json" })
-    @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Contact.class, responseContainer = "List", tags={ "Contact",  })
-    @io.swagger.annotations.ApiResponses(value = { 
-        @io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = Contact.class, responseContainer = "List") })
+	@GET
+	@Produces({ "application/json", "text/json" })
+	@io.swagger.annotations.ApiOperation(value = "", notes = "", response = Contact.class, responseContainer = "List", tags = {
+			"Contact", })
+	@io.swagger.annotations.ApiResponses(value = {
+			@io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = Contact.class, responseContainer = "List") })
+	public Response contactsGet(@Context SecurityContext securityContext) throws NotFoundException {
+		return delegate.contactsGet(securityContext);
+	}
 
-    public Response contactsGet()
-    throws NotFoundException {
-        return delegate.contactsGet();
-    }
-    @GET
-    @Path("/{id}")
-    
-    @Produces({ "application/json", "text/json" })
-    @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Contact.class, responseContainer = "List", tags={ "Contact" })
-    @io.swagger.annotations.ApiResponses(value = { 
-        @io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = Contact.class, responseContainer = "List") })
-
-    public Response contactsGetById(@ApiParam(value = "",required=true) @PathParam("id") Integer id)
-    throws NotFoundException {
-        return delegate.contactsGetById(id);
-    }
+	@GET
+	@Path("/{id}")
+	@Produces({ "application/json", "text/json" })
+	@io.swagger.annotations.ApiOperation(value = "", notes = "", response = Contact.class, responseContainer = "List", tags = {
+			"Contact" })
+	@io.swagger.annotations.ApiResponses(value = {
+			@io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = Contact.class, responseContainer = "List") })
+	public Response contactsGetById(@ApiParam(value = "", required = true) @PathParam("id") Integer id,
+			@Context SecurityContext securityContext) throws NotFoundException {
+		return delegate.contactsGetById(id, securityContext);
+	}
 }
-
